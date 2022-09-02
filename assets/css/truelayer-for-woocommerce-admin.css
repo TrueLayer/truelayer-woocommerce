@@ -1,0 +1,55 @@
+#truelayer-wrapper{
+    display: grid;
+    grid-template-columns: 7fr 3fr ;
+}
+
+#truelayer-main{
+    border-right: 1px solid #ccc;
+    padding-right: 1em;
+}
+
+#krokdocs-sidebar{
+    padding: 1em;
+}
+
+#krokdocs-text-container{
+    padding: 1em;
+    border: 1px solid #ccc;
+    width:  350px;
+    background-color: #f5f5f5;
+}
+
+.krokdocs-sidebar-title {
+    font-size:1.3em;
+    margin-bottom: 0.5em;
+}
+
+#krokdocs-sidebar-bottom-holder {
+    padding: 5px 10px 10px 10px;
+    margin-top: 10px;
+    align-self: flex-end;
+    flex-direction: column;
+}
+#krokdocs-sidebar-logo-follow-up-text {
+    align-self: flex-start;
+    color: #000000;
+    margin: 5px 0px 5px 0px !important;
+    font: 1em sans-serif;
+}
+#krokdocs-sidebar-krokedil-logo-right {
+    margin: 0px !important;
+    height: 20px;
+    width: auto;
+}
+
+#truelayer-example-suffix{
+    color: blue;
+}
+
+.truelayer-mock-home-store{
+    color: rgb(118, 162, 255);
+}
+
+.truelayer-mock-home-store-callback{
+    color: blue;
+}

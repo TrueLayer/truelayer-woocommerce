@@ -1,0 +1,257 @@
+# Copyright (C) 2022 Krokedil
+# This file is distributed under the same license as the TrueLayer for WooCommerce package.
+msgid ""
+msgstr ""
+"Project-Id-Version: TrueLayer for WooCommerce 0.1\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/truelayer-for-woocommerce\n"
+"POT-Creation-Date: 2022-02-17 13:46:57+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: classes/class-truelayer-confirmation.php:69
+msgid ""
+"The  has submitted the payment to the bank and the payment has been "
+"accepted successfully. The payment will be executed by the bank.."
+msgstr ""
+
+#: classes/class-truelayer-confirmation.php:73
+msgid "Customer failed to authorize the payment."
+msgstr ""
+
+#: classes/class-truelayer-confirmation.php:77
+msgid ""
+"The transaction was rejected by TrueLayer, or an error occurred during "
+"transaction processing."
+msgstr ""
+
+#: classes/class-truelayer-confirmation.php:81
+msgid "Customer canceled the TrueLayer payment."
+msgstr ""
+
+#: classes/class-truelayer-fields.php:25
+msgid "Enable/Disable"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:26
+msgid "Enable TrueLayer"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:32
+msgid "Title"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:34
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: classes/class-truelayer-fields.php:35
+msgid "Truelayer payment method"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:39
+msgid "Description"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:41
+msgid "This controls the description which the user sees during checkout."
+msgstr ""
+
+#: classes/class-truelayer-fields.php:42
+msgid "TrueLayer provides a secure and direct payment."
+msgstr ""
+
+#: classes/class-truelayer-fields.php:47
+msgid "Test mode"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:49
+msgid "Enable test mode for TrueLayer"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:54
+msgid "Logging"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:55
+msgid "Log debug messages"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:57
+msgid "Save debug messages to the WooCommerce System Status log."
+msgstr ""
+
+#: classes/class-truelayer-fields.php:69
+msgid "Type"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:71
+msgid "Enter your TrueLayer beneficiary type"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:76
+msgid "Merchant account ID"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:78
+msgid "Enter your TrueLayer beneficiary merchant account ID"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:83
+msgid "Account holder name"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:85
+msgid "Enter your Truelayer beneficiary account holder name"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:97
+msgid "Client ID"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:99
+msgid "Enter your TrueLayer Client ID"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:104
+msgid "Client Secret"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:106
+msgid "Enter your TrueLayer Client Secret"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:113
+msgid "Client Certificate"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:115
+msgid "Enter your TrueLayer Client Certificate"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:120
+msgid "Client Private Key"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:122
+msgid "Enter your TrueLayer Client Private Key"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:133
+msgid "Sandbox Client ID"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:135
+msgid "Enter your TrueLayer Sandbox Client ID"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:140
+msgid "Sandbox Client Secret"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:142
+msgid "Enter your TrueLayer Sandbox Client Secret"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:148
+msgid "Sandbox Client Certificate"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:150
+msgid "Enter your TrueLayer Sandbox Client Certificate"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:155
+msgid "Sandbox Client Private Key"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:157
+msgid "Enter your TrueLayer Sandbox Client Private Key"
+msgstr ""
+
+#: classes/class-truelayer-gateway.php:30
+#: includes/admin/views/status-report.php:17
+msgid "TrueLayer"
+msgstr ""
+
+#: classes/class-truelayer-gateway.php:31
+msgid "Direct bank payments via TrueLayer."
+msgstr ""
+
+#: classes/class-truelayer-gateway.php:122
+msgid "TrueLayer order refund failed: Could not create a refund with TrueLayer"
+msgstr ""
+
+#: classes/class-truelayer-gateway.php:127
+#. translators: refund amount.
+msgid "Successfully refunded %s with TrueLayer "
+msgstr ""
+
+#: includes/admin/views/status-report.php:17
+msgid "TrueLayer System Status."
+msgstr ""
+
+#: includes/admin/views/status-report.php:27
+msgid "Time"
+msgstr ""
+
+#: includes/admin/views/status-report.php:29
+msgid "Request"
+msgstr ""
+
+#: includes/admin/views/status-report.php:30
+msgid "Response Code"
+msgstr ""
+
+#: includes/admin/views/status-report.php:31
+msgid "Request URL"
+msgstr ""
+
+#: includes/admin/views/status-report.php:32
+msgid "Response Message"
+msgstr ""
+
+#: includes/admin/views/status-report.php:73
+msgid "No error logs"
+msgstr ""
+
+#: includes/truelayer-functions.php:34
+msgid "Order successfully placed with TrueLayer"
+msgstr ""
+
+#: truelayer-for-woocommerce.php:73 truelayer-for-woocommerce.php:82
+msgid "Nope"
+msgstr ""
+
+#: truelayer-for-woocommerce.php:118
+msgid "Settings"
+msgstr ""
+
+#: truelayer-for-woocommerce.php:119
+msgid "Support"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "TrueLayer for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://krokedil.com/product/truelayer-for-woocommerce/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "TrueLayer for WooCommerce."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Krokedil"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://krokedil.com/"
+msgstr ""
