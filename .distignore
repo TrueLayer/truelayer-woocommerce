@@ -9,8 +9,12 @@ composer.lock
 docker-compose.phpunit.yml
 docker-compose.yml
 Dockerfile
+DOCKER_ENV
+docker_tag
+Dockerfile-php-build
 gulpfile.js
 gruntfile.js
+output.log
 package.json
 package-lock.json
 phpcs.ruleset.xml
