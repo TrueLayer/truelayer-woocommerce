@@ -1,4 +1,4 @@
-name: Deploy to WordPress.org
+name: Build and deploy to WordPress.org
 on:
   push:
     tags:
@@ -8,7 +8,17 @@ jobs:
     name: New tag
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - name: Checkout code
+      uses: actions/checkout@master
+    - name: Install Composer dependencies
+      uses: php-actions/composer@v6
+      with:
+        dev: no
+        php_version: 7.4
+    - name: Build assets and translation files
+      run: | 
+        npm install
+        npm run build
     - name: WordPress Plugin Deploy
       uses: 10up/action-wordpress-plugin-deploy@master
       env:
