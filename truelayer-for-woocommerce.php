@@ -135,6 +135,11 @@ if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 		 * Init the plugin.
 		 */
 		public function init() {
+
+			if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
+				return;
+			}
+
 			load_plugin_textdomain( 'truelayer-for-woocommerce', false, plugin_basename( __DIR__ ) . '/languages' );
 			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 			$this->include_files();
