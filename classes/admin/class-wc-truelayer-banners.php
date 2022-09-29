@@ -19,20 +19,6 @@ if ( ! class_exists( 'WC_TrueLayer_Banners' ) ) {
 		 * WC_TrueLayer_Banners constructor.
 		 */
 		public function __construct() {
-			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_css' ) );
-		}
-
-		/**
-		 * Loads admin CSS file, has to be done here instead of gateway class, because
-		 * it is required in all admin pages.
-		 */
-		public function load_admin_css() {
-			wp_enqueue_style(
-				'truelayer_payments_admin',
-				plugins_url( 'assets/css/truelayer-admin.css?v=120320182113', TRUELAYER_WC_MAIN_FILE ),
-				array(),
-				TRUELAYER_WC_PLUGIN_VERSION
-			);
 		}
 
 		/**
