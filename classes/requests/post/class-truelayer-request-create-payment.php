@@ -66,6 +66,11 @@ class TrueLayer_Request_Create_Payment extends TrueLayer_Request_Post {
 			),
 		);
 
+		$customer_segment = $this->get_banking_providers();
+		if ( ! empty( $customer_segment ) ) {
+			$body['payment_method']['provider_selection']['filter']['customer_segments'] = $customer_segment;
+		}
+
 		return $body;
 	}
 
@@ -113,5 +118,15 @@ class TrueLayer_Request_Create_Payment extends TrueLayer_Request_Post {
 			'timeout'    => apply_filters( 'truelayer_request_timeout', 10 ),
 			'body'       => apply_filters( 'truelayer_request_args', wp_json_encode( $body ) ),
 		);
+	}
+
+	/**
+	 * Returns banking providers.
+	 *
+	 * @return array
+	 */
+	private function get_banking_providers() {
+		$banking_providers = empty( $this->settings['truelayer_banking_providers'] ) ? array() : $this->settings['truelayer_banking_providers'];
+		return array_map( 'strtolower', $banking_providers );
 	}
 }
