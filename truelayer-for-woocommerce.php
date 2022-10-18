@@ -109,7 +109,7 @@ if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 				return;
 			}
 			do_action( 'truelayer_plugin_activated' );
-			TrueLayer_Config_Keys::create_truelayer_key_and_save_to_wp_config();
+			TrueLayer_Config_Keys::get_instance()->create_truelayer_key_and_save_to_wp_config();
 		}
 
 		/**
@@ -121,7 +121,7 @@ if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 			if ( ! defined( 'TRUELAYER_KEY' ) ) {
 				return;
 			}
-			TrueLayer_Config_Keys::delete_truelayer_key_from_wp_config();
+			TrueLayer_Config_Keys::get_instance()->delete_truelayer_key_from_wp_config();
 		}
 
 		/**
