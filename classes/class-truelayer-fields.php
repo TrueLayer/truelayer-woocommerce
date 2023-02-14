@@ -173,21 +173,20 @@ class TrueLayer_Fields {
 				'desc_tip'    => true,
 			),
 			'truelayer_advance'                         => array(
-				'title' => 'TrueLayer Advance',
+				'title' => __( 'TrueLayer advanced settings', 'truelayer-for-woocommerce' ),
 				'type'  => 'title',
 			),
 
 			'truelayer_banking_providers'               => array(
-				'title'       => __( 'Banking Provider Types', 'truelayer-for-woocommerce' ),
-				'type'        => 'multiselect',
-				'description' => __( 'Banking Provider Types', 'truelayer-for-woocommerce' ),
-				'options'     => array(
+				'title'    => __( 'Banking Provider Types', 'truelayer-for-woocommerce' ),
+				'type'     => 'multiselect',
+				'options'  => array(
 					'Retail'    => __( 'Retail', 'truelayer-for-woocommerce' ),
 					'Business'  => __( 'Business', 'truelayer-for-woocommerce' ),
 					'Corporate' => __( 'Corporate', 'truelayer-for-woocommerce' ),
 				),
-				'default'     => '',
-				'desc_tip'    => true,
+				'default'  => '',
+				'desc_tip' => true,
 			),
 		);
 
