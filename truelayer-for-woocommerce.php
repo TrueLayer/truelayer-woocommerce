@@ -5,14 +5,14 @@
  * Description: TrueLayer for WooCommerce.
  * Author: Krokedil
  * Author URI: https://krokedil.com/
- * Version: 1.0.4
+ * Version: 1.1.0
  * Text Domain: truelayer-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 6.0.0
- * WC tested up to: 6.9.4
+ * WC tested up to: 7.3.0
  *
- * Copyright (c) 2022 Krokedil
+ * Copyright (c) 2022-2023 Krokedil
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
@@ -29,7 +29,7 @@ use Defuse\Crypto\Key;
 define( 'TRUELAYER_WC_MAIN_FILE', __FILE__ );
 define( 'TRUELAYER_WC_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'TRUELAYER_WC_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
-define( 'TRUELAYER_WC_PLUGIN_VERSION', '1.0.4' );
+define( 'TRUELAYER_WC_PLUGIN_VERSION', '1.1.0' );
 
 if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 	/**
