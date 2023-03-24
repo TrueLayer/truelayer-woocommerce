@@ -43,4 +43,17 @@ class TrueLayer_Helper_Order {
 
 		return $account_holder_name;
 	}
+
+    /**
+     * Get order meta - user date of birth
+     * @param $order
+     * @return mixed
+     */
+    public static function get_user_date_of_birth( $order ) {
+
+        $birth_date = apply_filters('truelayer_birth_date_field', $order->get_meta( '_truelayer_user_birth_date', true ), $order->get_id(), $order);
+
+        return $birth_date;
+
+    }
 }
