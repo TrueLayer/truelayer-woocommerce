@@ -27,6 +27,9 @@ class TrueLayer_Assets {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'truelayer_load_admin_js' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'truelayer_load_admin_css' ) );
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+        //Maybe add type='module' attr
+        add_filter('script_loader_tag', array( $this, 'add_type_attribute' ) , 10, 3);
 	}
 
 	/**
@@ -57,6 +60,42 @@ class TrueLayer_Assets {
 		wp_enqueue_script( 'truelayer-for-woocommerce-admin' );
 	}
 
+    public function enqueue_scripts() {
+        $settings = get_option( 'woocommerce_truelayer_settings', array() );
+        $epp_enabled  = $settings['truelayer_payment_page_type'] ?? 'HPP';
+
+        if ( 'EPP' !== $epp_enabled ) {
+            return;
+        }
+
+        if ( ! is_checkout() ) {
+            return;
+        }
+
+        if ( is_order_received_page() ) {
+            return;
+        }
+
+        wp_register_script(
+            'truelayer-epp',
+            ( TRUELAYER_WC_PLUGIN_URL . '/node_modules/truelayer-embedded-payment-page/dist/truelayer-payment.min.js'),
+            array(),
+            TRUELAYER_WC_PLUGIN_VERSION,
+            true
+        );
+
+        wp_register_script(
+            'truelayer-for-woocommerce',
+            ( TRUELAYER_WC_PLUGIN_URL . '/assets/js/truelayer-for-woocommerce.js' ),
+            array( 'jquery', 'truelayer-epp' ),
+            TRUELAYER_WC_PLUGIN_VERSION,
+            true
+        );
+
+
+        wp_enqueue_script( 'truelayer-epp' );
+        wp_enqueue_script( 'truelayer-for-woocommerce' );
+    }
 
 	/**
 	 * Check if assets should be loaded function
@@ -89,6 +128,15 @@ class TrueLayer_Assets {
 		);
 		wp_enqueue_style( 'truelayer-style' );
 	}
+
+    public function add_type_attribute($tag, $handle, $src) {
+        if ( 'truelayer-epp' !== $handle ) {
+            return $tag;
+        }
+        // change the script tag by adding type="module" and return it.
+        $tag = '<script id="' . $handle . '-js" type="module" src="' . esc_url( $src ) . '"></script>';
+        return $tag;
+    }
 
 }
 new Truelayer_Assets();
