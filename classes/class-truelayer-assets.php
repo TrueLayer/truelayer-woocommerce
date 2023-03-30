@@ -28,8 +28,6 @@ class TrueLayer_Assets {
 		add_action( 'admin_enqueue_scripts', array( $this, 'truelayer_load_admin_js' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'truelayer_load_admin_css' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-        //Maybe add type='module' attr
-        add_filter('script_loader_tag', array( $this, 'add_type_attribute' ) , 10, 3);
 	}
 
 	/**
@@ -60,9 +58,13 @@ class TrueLayer_Assets {
 		wp_enqueue_script( 'truelayer-for-woocommerce-admin' );
 	}
 
+    /**
+     * Loads scripts for the EPP (if enabled).
+     */
     public function enqueue_scripts() {
         $settings = get_option( 'woocommerce_truelayer_settings', array() );
         $epp_enabled  = $settings['truelayer_payment_page_type'] ?? 'HPP';
+        $production = 'yes' !== $settings['testmode'];
 
         if ( 'EPP' !== $epp_enabled ) {
             return;
@@ -76,9 +78,11 @@ class TrueLayer_Assets {
             return;
         }
 
+        $script_version = $this->truelayer_is_script_debug_enabled();
+
         wp_register_script(
             'truelayer-epp',
-            ( TRUELAYER_WC_PLUGIN_URL . '/node_modules/truelayer-embedded-payment-page/dist/truelayer-payment.min.js'),
+            plugins_url( 'node_modules/truelayer-embedded-payment-page/dist/truelayer-payment.min.js', TRUELAYER_WC_MAIN_FILE),
             array(),
             TRUELAYER_WC_PLUGIN_VERSION,
             true
@@ -86,13 +90,17 @@ class TrueLayer_Assets {
 
         wp_register_script(
             'truelayer-for-woocommerce',
-            ( TRUELAYER_WC_PLUGIN_URL . '/assets/js/truelayer-for-woocommerce.js' ),
+            plugins_url( 'assets/js/truelayer-for-woocommerce' . $script_version . '.js', TRUELAYER_WC_MAIN_FILE ),
             array( 'jquery', 'truelayer-epp' ),
             TRUELAYER_WC_PLUGIN_VERSION,
             true
         );
 
+        $checkout_localize_params = array(
+            'production' => $production
+        );
 
+        wp_localize_script( 'truelayer-for-woocommerce', 'truelayerParams', $checkout_localize_params );
         wp_enqueue_script( 'truelayer-epp' );
         wp_enqueue_script( 'truelayer-for-woocommerce' );
     }
@@ -128,15 +136,6 @@ class TrueLayer_Assets {
 		);
 		wp_enqueue_style( 'truelayer-style' );
 	}
-
-    public function add_type_attribute($tag, $handle, $src) {
-        if ( 'truelayer-epp' !== $handle ) {
-            return $tag;
-        }
-        // change the script tag by adding type="module" and return it.
-        $tag = '<script id="' . $handle . '-js" type="module" src="' . esc_url( $src ) . '"></script>';
-        return $tag;
-    }
 
 }
 new Truelayer_Assets();
