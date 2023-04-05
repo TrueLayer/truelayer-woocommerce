@@ -168,6 +168,7 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 		if ( is_wp_error( $response ) ) {
 			$note = __( 'Failed creating order with TrueLayer', 'truelayer-for-woocommerce' );
 			wc_add_notice( $note, 'error' );
+                        TrueLayer_Logger::log( sprintf( 'Failed creating order with TrueLayer. Error message: %s', $response->get_error_message() ) );
 
 			return array(
 				'result' => 'error',
