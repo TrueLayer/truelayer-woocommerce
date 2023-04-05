@@ -15,3 +15,7 @@ Start the containers
 
 Stop the containers
 "docker-compose stop"
+
+Build the plugin:
+"composer install"
+"npm install"
