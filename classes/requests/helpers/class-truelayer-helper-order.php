@@ -51,7 +51,7 @@ class TrueLayer_Helper_Order {
      */
     public static function get_user_date_of_birth( $order ) {
 
-        $birth_date = apply_filters('truelayer_birth_date_field', $order->get_meta( '_truelayer_user_birth_date', true ), $order->get_id(), $order);
+        $birth_date =  $order->get_meta( apply_filters( 'truelayer_birth_date_field', '_truelayer_user_birth_date', $order->get_id(), $order ), true );
 
         return $birth_date;
 
