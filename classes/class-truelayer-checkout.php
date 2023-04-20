@@ -17,26 +17,30 @@ class Truelayer_Checkout {
      * Truelayer_Checkout constructor.
      */
     public function __construct() {
-        add_filter('woocommerce_get_country_locale', array( $this, 'make_state_required' ), 10, 1);
+        add_action('woocommerce_after_checkout_validation', array( $this, 'validate_state_for_true_layer' ), 10, 2);
     }
 
     /**
-     *
-     * Filter out default WooCommerce settings for country locale.
-     * If state is defined and hidden it should stay optional, otherwise it should be required.
-     *
-     * @return array
+     * Trow validation error if state field is empty and not hidden by default in WC only if chosen shipping method is TrueLayer
+     * @param $fields
+     * @param $errors
+     * @return void
      */
-    public function make_state_required( $country_locale ) {
-
-        //Hidden is not set if it's not true
-        foreach( $country_locale AS $country => $settings ) {
-            if( ! isset( $settings['state']['hidden'] ) || ( isset( $settings['state']['hidden'] ) && ! empty( $state_hidden = $settings['state']['hidden'] ) && ( false === $state_hidden ) ) ) {
-                $country_locale[$country]['state']['required'] = true;
-            }
+    function validate_state_for_true_layer( $data, $errors ){
+        $selected_country = $data[ 'billing_country' ] ?? '';
+        $countries = WC()->countries->get_country_locale();
+        if ( ! empty( $selected_country_settings =  $countries[$selected_country] ) &&
+            ( ! isset( $selected_country_settings['state']['hidden'] )
+                || (
+                    ! empty( $state_hidden = $selected_country_settings['state']['hidden'] )
+                    && ( false === $selected_country_settings )
+                )
+            )
+            && 'truelayer' === WC()->session->get('chosen_payment_method')
+            && empty( $data['billing_state'] ) )
+        {
+            $errors->add( 'validation', sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . __('Billing State', 'woocommerce') . '</strong>' ) );
         }
-
-        return $country_locale;
     }
 }
 new Truelayer_Checkout();
