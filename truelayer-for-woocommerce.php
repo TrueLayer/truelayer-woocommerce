@@ -214,6 +214,7 @@ if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-logger.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-status.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-assets.php';
+			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-checkout.php';
 
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/admin/class-wc-truelayer-banners.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-encryption.php';
