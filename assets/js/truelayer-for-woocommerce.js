@@ -22,7 +22,12 @@ jQuery(function ($) {
             }
         },
 
-        initializeEpp: function( url, payment_id, payment_token ) {
+        initializeEpp: function (url, payment_id, payment_token) {
+            if (!this.Payment) {
+                console.log("Truelayer Payment is not initialized");
+                return;
+            }
+
             const payment = this.Payment({
                 payment_id: payment_id,
                 resource_token: payment_token,
@@ -48,4 +53,3 @@ jQuery(function ($) {
 
     truelayerForWooCommerce.init();
 });
-
