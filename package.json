@@ -23,5 +23,8 @@
     "cssmin": "npx grunt cssmin",
     "jsmin": "npx webpack",
     "build": "yarn makepot && yarn jsmin & yarn cssmin"
+  },
+  "dependencies": {
+    "truelayer-embedded-payment-page": "^0.2.14"
   }
 }
