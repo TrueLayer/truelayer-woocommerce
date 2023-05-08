@@ -188,6 +188,18 @@ class TrueLayer_Fields {
 				'default'  => '',
 				'desc_tip' => true,
 			),
+
+			'truelayer_payment_page_type'               => array(
+				'title'    => __( 'Payments Page Types', 'truelayer-for-woocommerce' ),
+				'type'     => 'select',
+				'options'  => array(
+					'HPP'    => __( 'Hosted Payments Page', 'truelayer-for-woocommerce' ),
+					'EPP'  => __( 'Embedded Payments Page', 'truelayer-for-woocommerce' ),
+				),
+				'default'  => 'HPP',
+				'desc_tip' => true,
+			),
+
 		);
 
 		return apply_filters( 'truelayer_gateway_settings', $settings );

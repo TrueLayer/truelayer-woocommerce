@@ -3,6 +3,7 @@ module.exports = {
 	mode: 'production', // production
 	entry: {
 		'truelayer-for-woocommerce-admin': './assets/js/truelayer-for-woocommerce-admin.js',
+		'truelayer-for-woocommerce': './assets/js/truelayer-for-woocommerce.js',
 	},
 
 	output: {
