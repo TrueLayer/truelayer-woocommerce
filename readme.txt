@@ -2,13 +2,13 @@
 Contributors: krokedil, danilokrlovic
 Tags: ecommerce, e-commerce, woocommerce, truelayer, payments, instant payments, refunds, open banking
 Requires at least: 5.0
-Tested up to: 6.1.1
+Tested up to: 6.2.0
 Requires PHP: 7.4
 WC requires at least: 6.0.0
-WC tested up to: 7.3.0
+WC tested up to: 7.6.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 
 TrueLayer for WooCommerce is a plugin that extends WooCommerce, allowing you to take payments via TrueLayer.
 
@@ -54,6 +54,11 @@ More information on how to get started can be found in the [plugin documentation
 6. Read more about the configuration process in the [plugin documentation](https://docs.krokedil.com/truelayer-for-woocommerce/).
 
 == CHANGELOG ==
+= 2023.05.08        - version 1.2.0 =
+* Feature           - Added support for embedded payment page for the checkout as a option.
+* Feature           - Add customer address to the create payment request if we have any.
+* Enhancement       - We now save the customers date of birth to the order under the meta filed, _truelayer_user_birth_date. This can be filtered using the truelayer_birth_date_field filter.
+
 = 2023.02.14        - version 1.1.0 =
 * Feature           - Add support for sending different customer types in create payment request. New setting "Banking Provider Types" introduced to control this feature.
 * Tweak             - Bumped minimum required PHP version to 7.4.
