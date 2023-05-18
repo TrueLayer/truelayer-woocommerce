@@ -183,15 +183,20 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 
 		$build_test_url = Truelayer_Helper_Hosted_Payment_Page_URL::build_hosted_payment_page_url( $order_id );
 
-                if( 'EPP' === $epp_enabled ) {
-                        $encoded_url = base64_encode( rawurlencode( home_url( '/wc-api/TrueLayer_Redirect/' ) ) );
-                        $encoded_payment_id = base64_encode( $truelayer_payment_id );
-                        $encoded_payment_token = base64_encode( $truelayer_payment_token );
-                        return array(
-                                'result'   => 'success',
-                                'redirect' => '#truelayer:' . $encoded_url . ':' . $encoded_payment_id . ':' . $encoded_payment_token, // phpcs:ignore
-                        );
-                }
+		if ( 'EPP' === $epp_enabled ) {
+			$url = add_query_arg(
+				array(
+					'payment_id' => $truelayer_payment_id,
+					'token'      => $truelayer_payment_token
+				),
+				home_url( '/wc-api/TrueLayer_Redirect/' )
+			);
+
+			return array(
+				'result'   => 'success',
+				'redirect' => '#truelayer=' . rawurlencode( $url ),
+			);
+		}
 
 		return array(
 			'result'   => 'success',
