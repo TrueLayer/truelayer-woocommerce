@@ -1,36 +1,96 @@
-# Copyright (C) 2022 Krokedil
+# Copyright (C) 2023 Krokedil
 # This file is distributed under the same license as the TrueLayer for WooCommerce package.
 msgid ""
 msgstr ""
-"Project-Id-Version: TrueLayer for WooCommerce 0.1\n"
+"Project-Id-Version: TrueLayer for WooCommerce 1.2.0\n"
 "Report-Msgid-Bugs-To: "
-"https://wordpress.org/support/plugin/truelayer-for-woocommerce\n"
-"POT-Creation-Date: 2022-02-17 13:46:57+00:00\n"
+"https://wordpress.org/support/plugin/truelayer-woocommerce\n"
+"POT-Creation-Date: 2023-05-10 15:39:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: classes/class-truelayer-confirmation.php:69
-msgid ""
-"The  has submitted the payment to the bank and the payment has been "
-"accepted successfully. The payment will be executed by the bank.."
+#: classes/class-truelayer-callbacks.php:123
+#: classes/class-truelayer-callbacks.php:206
+msgid "TrueLayer payment failed."
 msgstr ""
 
+#: classes/class-truelayer-callbacks.php:127
+#: classes/class-truelayer-callbacks.php:210
+msgid "TrueLayer payment failed: payment provider rejection."
+msgstr ""
+
+#: classes/class-truelayer-callbacks.php:131
+#: classes/class-truelayer-callbacks.php:214
 #: classes/class-truelayer-confirmation.php:73
-msgid "Customer failed to authorize the payment."
+msgid "TrueLayer payment failed: unkown event."
 msgstr ""
 
-#: classes/class-truelayer-confirmation.php:77
-msgid ""
-"The transaction was rejected by TrueLayer, or an error occurred during "
-"transaction processing."
+#: classes/class-truelayer-callbacks.php:165
+msgid "TrueLayer payment settlement failed. Failure reason: "
 msgstr ""
 
-#: classes/class-truelayer-confirmation.php:81
+#: classes/class-truelayer-callbacks.php:177
+#. Translators: TrueLayer payment source id and payment user id returned in
+#. payment settled callback.
+msgid "TrueLayer payment settled. Payment source id: %1$s. Payment user id: %2$s."
+msgstr ""
+
+#: classes/class-truelayer-callbacks.php:243
+msgid "TrueLayer payout executed failed. Failure reason: "
+msgstr ""
+
+#: classes/class-truelayer-callbacks.php:253
+#. Translators: TrueLayer payment source id and payment user id returned in
+#. payment settled callback.
+msgid "TrueLayer payout executed. Payout id: %1$s."
+msgstr ""
+
+#: classes/class-truelayer-callbacks.php:280
+#. Translators: Payout failure reason.
+msgid "TrueLayer payout failed. Failure reason: %s."
+msgstr ""
+
+#: classes/class-truelayer-callbacks.php:307
+msgid "TrueLayer refund executed failed. Failure reason: "
+msgstr ""
+
+#: classes/class-truelayer-callbacks.php:317
+#. Translators: TrueLayer payment source id and payment user id returned in
+#. payment settled callback.
+msgid "TrueLayer refund executed. Refund id: %1$s."
+msgstr ""
+
+#: classes/class-truelayer-callbacks.php:344
+#. Translators: Payout failure reason.
+msgid "TrueLayer refund failed. Failure reason: %s."
+msgstr ""
+
+#: classes/class-truelayer-checkout.php:42
+msgid "%s is a required field."
+msgstr ""
+
+#: classes/class-truelayer-checkout.php:42
+msgid "Billing State"
+msgstr ""
+
+#: classes/class-truelayer-config-keys.php:52
+#: classes/class-truelayer-config-keys.php:61
+#: classes/class-truelayer-encryption.php:77
+#: classes/class-truelayer-encryption.php:86 truelayer-for-woocommerce.php:74
+#: truelayer-for-woocommerce.php:83
+msgid "Nope"
+msgstr ""
+
+#: classes/class-truelayer-confirmation.php:57
+msgid "Something went wrong, please contact the store owner."
+msgstr ""
+
+#: classes/class-truelayer-confirmation.php:69
 msgid "Customer canceled the TrueLayer payment."
 msgstr ""
 
@@ -51,7 +111,7 @@ msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
 #: classes/class-truelayer-fields.php:35
-msgid "Truelayer payment method"
+msgid "Instant Bank Transfer"
 msgstr ""
 
 #: classes/class-truelayer-fields.php:39
@@ -60,10 +120,6 @@ msgstr ""
 
 #: classes/class-truelayer-fields.php:41
 msgid "This controls the description which the user sees during checkout."
-msgstr ""
-
-#: classes/class-truelayer-fields.php:42
-msgid "TrueLayer provides a secure and direct payment."
 msgstr ""
 
 #: classes/class-truelayer-fields.php:47
@@ -86,153 +142,214 @@ msgstr ""
 msgid "Save debug messages to the WooCommerce System Status log."
 msgstr ""
 
-#: classes/class-truelayer-fields.php:69
-msgid "Type"
-msgstr ""
-
-#: classes/class-truelayer-fields.php:71
-msgid "Enter your TrueLayer beneficiary type"
-msgstr ""
-
-#: classes/class-truelayer-fields.php:76
-msgid "Merchant account ID"
-msgstr ""
-
-#: classes/class-truelayer-fields.php:78
-msgid "Enter your TrueLayer beneficiary merchant account ID"
-msgstr ""
-
-#: classes/class-truelayer-fields.php:83
+#: classes/class-truelayer-fields.php:68
 msgid "Account holder name"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:85
+#: classes/class-truelayer-fields.php:70
 msgid "Enter your Truelayer beneficiary account holder name"
 msgstr ""
 
+#: classes/class-truelayer-fields.php:75
+msgid "Merchant Account ID - GBP"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:77
+msgid "Enter your TrueLayer GBP Merchant Account ID"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:82
+msgid "Merchant Account ID - EUR"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:84
+msgid "Enter your TrueLayer EUR Merchant Account ID"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:89
+msgid "Available EUR countries"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:92
+msgid ""
+"Select the countries that should be available in checkout if EUR is the "
+"selected currency."
+msgstr ""
+
+#: classes/class-truelayer-fields.php:94
+msgid "France"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:95
+msgid "Ireland"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:96
+msgid "Lithuania"
+msgstr ""
+
 #: classes/class-truelayer-fields.php:97
+msgid "Netherlands"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:98
+msgid "Spain"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:111
 msgid "Client ID"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:99
+#: classes/class-truelayer-fields.php:113
 msgid "Enter your TrueLayer Client ID"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:104
+#: classes/class-truelayer-fields.php:118
 msgid "Client Secret"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:106
+#: classes/class-truelayer-fields.php:120
 msgid "Enter your TrueLayer Client Secret"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:113
+#: classes/class-truelayer-fields.php:127
 msgid "Client Certificate"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:115
+#: classes/class-truelayer-fields.php:129
 msgid "Enter your TrueLayer Client Certificate"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:120
+#: classes/class-truelayer-fields.php:134
 msgid "Client Private Key"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:122
+#: classes/class-truelayer-fields.php:136
 msgid "Enter your TrueLayer Client Private Key"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:133
+#: classes/class-truelayer-fields.php:147
 msgid "Sandbox Client ID"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:135
+#: classes/class-truelayer-fields.php:149
 msgid "Enter your TrueLayer Sandbox Client ID"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:140
+#: classes/class-truelayer-fields.php:154
 msgid "Sandbox Client Secret"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:142
+#: classes/class-truelayer-fields.php:156
 msgid "Enter your TrueLayer Sandbox Client Secret"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:148
+#: classes/class-truelayer-fields.php:162
 msgid "Sandbox Client Certificate"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:150
+#: classes/class-truelayer-fields.php:164
 msgid "Enter your TrueLayer Sandbox Client Certificate"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:155
+#: classes/class-truelayer-fields.php:169
 msgid "Sandbox Client Private Key"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:157
+#: classes/class-truelayer-fields.php:171
 msgid "Enter your TrueLayer Sandbox Client Private Key"
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:30
+#: classes/class-truelayer-fields.php:176
+msgid "TrueLayer advanced settings"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:181
+msgid "Banking Provider Types"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:184
+msgid "Retail"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:185
+msgid "Business"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:186
+msgid "Corporate"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:193
+msgid "Payments Page Types"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:196
+msgid "Hosted Payments Page"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:197
+msgid "Embedded Payments Page"
+msgstr ""
+
+#: classes/class-truelayer-gateway.php:37
 #: includes/admin/views/status-report.php:17
 msgid "TrueLayer"
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:31
+#: classes/class-truelayer-gateway.php:38
 msgid "Direct bank payments via TrueLayer."
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:122
-msgid "TrueLayer order refund failed: Could not create a refund with TrueLayer"
+#: classes/class-truelayer-gateway.php:169
+msgid "Failed creating order with TrueLayer"
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:127
+#: classes/class-truelayer-gateway.php:219
+#. translators: refund error.
+msgid "TrueLayer order refund failed: %s"
+msgstr ""
+
+#: classes/class-truelayer-gateway.php:224
 #. translators: refund amount.
-msgid "Successfully refunded %s with TrueLayer "
+msgid ""
+"TrueLayer received refund request (%s). Awaiting refund executed "
+"notification from TrueLayer."
 msgstr ""
 
 #: includes/admin/views/status-report.php:17
 msgid "TrueLayer System Status."
 msgstr ""
 
-#: includes/admin/views/status-report.php:27
+#: includes/admin/views/status-report.php:29
 msgid "Time"
 msgstr ""
 
-#: includes/admin/views/status-report.php:29
+#: includes/admin/views/status-report.php:31
 msgid "Request"
 msgstr ""
 
-#: includes/admin/views/status-report.php:30
+#: includes/admin/views/status-report.php:32
 msgid "Response Code"
 msgstr ""
 
-#: includes/admin/views/status-report.php:31
-msgid "Request URL"
-msgstr ""
-
-#: includes/admin/views/status-report.php:32
+#: includes/admin/views/status-report.php:33
 msgid "Response Message"
 msgstr ""
 
-#: includes/admin/views/status-report.php:73
+#: includes/admin/views/status-report.php:67
 msgid "No error logs"
 msgstr ""
 
 #: includes/truelayer-functions.php:34
-msgid "Order successfully placed with TrueLayer"
+msgid "Order successfully placed with TrueLayer. Payment transaction id:"
 msgstr ""
 
-#: truelayer-for-woocommerce.php:73 truelayer-for-woocommerce.php:82
-msgid "Nope"
-msgstr ""
-
-#: truelayer-for-woocommerce.php:118
+#: truelayer-for-woocommerce.php:158
 msgid "Settings"
 msgstr ""
 
-#: truelayer-for-woocommerce.php:119
+#: truelayer-for-woocommerce.php:159
 msgid "Support"
 msgstr ""
 
