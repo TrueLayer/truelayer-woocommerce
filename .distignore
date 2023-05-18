@@ -1,6 +1,7 @@
 /.wordpress-org
 /.git
-    /.github
+/.github
+/node_modules
 .distignore
 .gitignore
 composer.json
