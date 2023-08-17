@@ -2,10 +2,10 @@
 Contributors: krokedil, danilokrlovic
 Tags: ecommerce, e-commerce, woocommerce, truelayer, payments, instant payments, refunds, open banking
 Requires at least: 5.0
-Tested up to: 6.2.2
+Tested up to: 6.3
 Requires PHP: 7.4
 WC requires at least: 6.0.0
-WC tested up to: 7.8.2
+WC tested up to: 8.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Stable tag: 1.2.0
