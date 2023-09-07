@@ -160,12 +160,15 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 	 * @return array
 	 */
 	public function process_payment( $order_id ) {
+                $settings = get_option( 'woocommerce_truelayer_settings', array() );
+                $epp_enabled  = $settings['truelayer_payment_page_type'] ?? 'HPP';
 
 		$response = TrueLayer()->api->create_payment( $order_id );
 
 		if ( is_wp_error( $response ) ) {
 			$note = __( 'Failed creating order with TrueLayer', 'truelayer-for-woocommerce' );
 			wc_add_notice( $note, 'error' );
+                        TrueLayer_Logger::log( sprintf( 'Failed creating order with TrueLayer. Error message: %s', $response->get_error_message() ) );
 
 			return array(
 				'result' => 'error',
@@ -179,6 +182,21 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 		update_post_meta( $order_id, '_truelayer_payment_token', $truelayer_payment_token );
 
 		$build_test_url = Truelayer_Helper_Hosted_Payment_Page_URL::build_hosted_payment_page_url( $order_id );
+
+		if ( 'EPP' === $epp_enabled ) {
+			$url = add_query_arg(
+				array(
+					'payment_id' => $truelayer_payment_id,
+					'token'      => $truelayer_payment_token
+				),
+				home_url( '/wc-api/TrueLayer_Redirect/' )
+			);
+
+			return array(
+				'result'   => 'success',
+				'redirect' => '#truelayer=' . rawurlencode( $url ),
+			);
+		}
 
 		return array(
 			'result'   => 'success',

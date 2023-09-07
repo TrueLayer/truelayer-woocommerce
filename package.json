@@ -16,12 +16,14 @@
     "grunt-contrib-uglify": "^5.0.1",
     "grunt-wp-i18n": "^1.0.3",
     "webpack": "^5.76.0",
-    "webpack-cli": "^4.10.0"
+    "webpack-cli": "^4.10.0",
+    "truelayer-embedded-payment-page": "^0.2.14"
   },
   "scripts": {
     "makepot": "npx grunt makepot",
     "cssmin": "npx grunt cssmin",
     "jsmin": "npx webpack",
-    "build": "yarn makepot && yarn jsmin & yarn cssmin"
+    "build": "yarn makepot && yarn jsmin & yarn cssmin",
+    "dev": "npx webpack --watch"
   }
 }

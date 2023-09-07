@@ -5,12 +5,12 @@
  * Description: TrueLayer for WooCommerce.
  * Author: Krokedil
  * Author URI: https://krokedil.com/
- * Version: 1.1.0
+ * Version: 1.2.0
  * Text Domain: truelayer-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 6.0.0
- * WC tested up to: 7.3.0
+ * WC tested up to: 7.6.1
  *
  * Copyright (c) 2022-2023 Krokedil
  *
@@ -29,7 +29,7 @@ use Defuse\Crypto\Key;
 define( 'TRUELAYER_WC_MAIN_FILE', __FILE__ );
 define( 'TRUELAYER_WC_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'TRUELAYER_WC_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
-define( 'TRUELAYER_WC_PLUGIN_VERSION', '1.1.0' );
+define( 'TRUELAYER_WC_PLUGIN_VERSION', '1.2.0' );
 
 if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 	/**
@@ -214,6 +214,7 @@ if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-logger.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-status.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-assets.php';
+			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-checkout.php';
 
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/admin/class-wc-truelayer-banners.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-encryption.php';

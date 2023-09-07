@@ -60,14 +60,29 @@ class TrueLayer_Request_Create_Payment extends TrueLayer_Request_Post {
 					),
 				),
 			),
-			'user'            => array(
-				'name'  => TrueLayer_Helper_Order::get_account_holder_name( $order ),
-				'email' => $order->get_billing_email(),
-			),
-		);
+            'user'            => array(
+                'name'  => TrueLayer_Helper_Order::get_account_holder_name( $order ),
+                'email' => $order->get_billing_email(),
+            ),
+        );
+
+        if( ! empty( $order->get_billing_address_1() ) ) {
+            $body['user']['address'] = array(
+                'address_line1' => $order->get_billing_address_1(),
+                'address_line2' => $order->get_billing_address_2(),
+                'city' => $order->get_billing_city(),
+                'state' => ! empty( $state = $order->get_billing_state() ) ? $state : 'NA',
+                'zip' => $order->get_billing_postcode(),
+                'country_code' => $order->get_billing_country(),
+            );
+        }
+
+        if( ! empty( $birth_date = TrueLayer_Helper_Order::get_user_date_of_birth( $order ) ) ) {
+            $body['user']['date_of_birth'] = $birth_date;
+        }
 
 		$customer_segment = $this->get_banking_providers();
-		if ( ! empty( $customer_segment ) ) {
+        if ( ! empty( $customer_segment ) ) {
 			$body['payment_method']['provider_selection']['filter']['customer_segments'] = $customer_segment;
 		}
 

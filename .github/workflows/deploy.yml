@@ -16,8 +16,8 @@ jobs:
         dev: no
         php_version: 7.4
     - name: Build assets and translation files
-      run: | 
-        npm install
+      run: |
+        npm ci
         npm run build
     - name: WordPress Plugin Deploy
       uses: 10up/action-wordpress-plugin-deploy@master
