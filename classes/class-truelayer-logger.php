@@ -72,7 +72,8 @@ class TrueLayer_Logger {
 		if ( ! is_wp_error( $response ) && isset( $response['OrderHtmlSnippet'] ) ) {// todo check snippet.
 			unset( $response['OrderHtmlSnippet'] );
 		}
-        // Unset the snippet to prevent issues in the request body.
+		
+		// Unset the snippet to prevent issues in the request body.
 		if ( isset( $request_args['body'] ) ) {
 			$request_body = json_decode($request_args['body'], true);
 
