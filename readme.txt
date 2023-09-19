@@ -55,7 +55,7 @@ More information on how to get started can be found in the [plugin documentation
 
 == CHANGELOG ==
 = 2023.09.19        - version 1.3.0 =
-* Feature           - Add feature to set a custom release channel for the payment in TrueLayer. This can be set on the settings page for the plugin in the setting "Release channel". If left empty no release channel will be sent to Truelayer.
+* Feature           - Add feature to set a custom release channel for the payment in TrueLayer. This can be set on the settings page for the plugin in the setting "Release channel". If left empty no release channel will be sent to TrueLayer.
 * Fix               - Fixed some deprecation warnings for PHP version 8.2+.
 
 = 2023.09.15        - version 1.2.1 =
