@@ -13,8 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class TrueLayer_Payment_Gateway.
  */
 class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
-
-
 	/**
 	 * Allowed currencies.
 	 *
@@ -28,6 +26,13 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 	 * @var string
 	 */
 	public $testmode;
+
+	/**
+	 * The plugin logging setting value.
+	 *
+	 * @var string
+	 */
+	public $logging;
 
 	/**
 	 * Class constructor.
@@ -85,7 +90,6 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 			$client_secret      = 'truelayer_client_secret';
 			$client_certificate = 'truelayer_client_certificate';
 		}
-		$settings             = get_option( 'woocommerce_truelayer_settings', array() );
 		$truelayer_options    = array( $private_key, $client_secret, $client_certificate );
 		$truelayer_encryption = Truelayer_Encryption::get_instance();
 		if ( ! empty( $settings[ $key ] ) ) {
@@ -160,8 +164,8 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 	 * @return array
 	 */
 	public function process_payment( $order_id ) {
-                $settings = get_option( 'woocommerce_truelayer_settings', array() );
-                $epp_enabled  = $settings['truelayer_payment_page_type'] ?? 'HPP';
+		$settings    = get_option( 'woocommerce_truelayer_settings', array() );
+		$epp_enabled = $settings['truelayer_payment_page_type'] ?? 'HPP';
 
 		$response = TrueLayer()->api->create_payment( $order_id );
 

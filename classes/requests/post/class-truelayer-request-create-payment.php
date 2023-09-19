@@ -86,6 +86,11 @@ class TrueLayer_Request_Create_Payment extends TrueLayer_Request_Post {
 			$body['payment_method']['provider_selection']['filter']['customer_segments'] = $customer_segment;
 		}
 
+		$release_channel = $this->get_release_channel();
+		if ( ! empty( $release_channel ) ) {
+			$body['payment_method']['provider_selection']['filter']['release_channel'] = $release_channel;
+		}
+
 		return $body;
 	}
 
@@ -143,5 +148,15 @@ class TrueLayer_Request_Create_Payment extends TrueLayer_Request_Post {
 	private function get_banking_providers() {
 		$banking_providers = empty( $this->settings['truelayer_banking_providers'] ) ? array() : $this->settings['truelayer_banking_providers'];
 		return array_map( 'strtolower', $banking_providers );
+	}
+
+	/**
+	 * Returns the release channel
+	 *
+	 * @return array
+	 */
+	private function get_release_channel() {
+		$release_channel = empty( $this->settings['truelayer_release_channel'] ) ? array() : $this->settings['truelayer_release_channel'];
+		return $release_channel;
 	}
 }
