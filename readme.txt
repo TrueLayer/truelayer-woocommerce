@@ -2,13 +2,13 @@
 Contributors: krokedil, danilokrlovic
 Tags: ecommerce, e-commerce, woocommerce, truelayer, payments, instant payments, refunds, open banking
 Requires at least: 5.0
-Tested up to: 6.2.0
+Tested up to: 6.3.1
 Requires PHP: 7.4
 WC requires at least: 6.0.0
-WC tested up to: 7.6.1
+WC tested up to: 8.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 
 TrueLayer for WooCommerce is a plugin that extends WooCommerce, allowing you to take payments via TrueLayer.
 
@@ -54,6 +54,10 @@ More information on how to get started can be found in the [plugin documentation
 6. Read more about the configuration process in the [plugin documentation](https://docs.krokedil.com/truelayer-for-woocommerce/).
 
 == CHANGELOG ==
+= 2023.09.19        - version 1.3.0 =
+* Feature           - Add feature to set a custom release channel for the payment in TrueLayer. This can be set on the settings page for the plugin in the setting "Release channel". If left empty no release channel will be sent to TrueLayer.
+* Fix               - Fixed some deprecation warnings for PHP version 8.2+.
+
 = 2023.09.15        - version 1.2.1 =
 * Fix               - Remove sensitive data from logs
 
