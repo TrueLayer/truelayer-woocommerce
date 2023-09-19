@@ -98,7 +98,7 @@ class TrueLayer_Assets {
 	 * @return bool
 	 */
 	protected function check_for_load_assets() {
-		$section = filter_input( INPUT_GET, 'section', FILTER_SANITIZE_STRING );
+		$section = filter_input( INPUT_GET, 'section', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		if ( empty( $section ) || 'truelayer' !== $section ) {
 			return false;
 		}
