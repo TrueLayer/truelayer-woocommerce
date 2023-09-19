@@ -13,8 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class TrueLayer_Payment_Gateway.
  */
 class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
-
-
 	/**
 	 * Allowed currencies.
 	 *
@@ -28,6 +26,13 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 	 * @var string
 	 */
 	public $testmode;
+
+	/**
+	 * The plugin logging setting value.
+	 *
+	 * @var string
+	 */
+	public $logging;
 
 	/**
 	 * Class constructor.
