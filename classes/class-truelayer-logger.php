@@ -72,12 +72,19 @@ class TrueLayer_Logger {
 		if ( ! is_wp_error( $response ) && isset( $response['OrderHtmlSnippet'] ) ) {// todo check snippet.
 			unset( $response['OrderHtmlSnippet'] );
 		}
+		
 		// Unset the snippet to prevent issues in the request body.
 		if ( isset( $request_args['body'] ) ) {
-			$request_body = json_decode( $request_args['body'], true );
-			if ( isset( $request_body['OrderHtmlSnippet'] ) ) {
-				unset( $request_body['OrderHtmlSnippet'] );
-				$request_args['body'] = wp_json_encode( $request_body );
+			$request_body = json_decode($request_args['body'], true);
+
+			if (isset($request_body['OrderHtmlSnippet'])) {
+				unset($request_body['OrderHtmlSnippet']);
+				$request_args['body'] = wp_json_encode($request_body);
+			}
+
+			if (isset($request_body['client_secret'])) {
+				unset($request_body['client_secret']);
+				$request_args['body'] = wp_json_encode($request_body);
 			}
 		}
 
