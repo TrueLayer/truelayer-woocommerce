@@ -28,13 +28,6 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 	public $testmode;
 
 	/**
-	 * The plugin logging setting value.
-	 *
-	 * @var string
-	 */
-	public $logging;
-
-	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
@@ -56,7 +49,6 @@ class TrueLayer_Payment_Gateway extends WC_Payment_Gateway {
 		$this->description = $this->get_option( 'description' );
 
 		$this->testmode = $this->get_option( 'testmode' );
-		$this->logging  = $this->get_option( 'logging' );
 
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( &$this, 'process_admin_options' ) );
 		add_action(
