@@ -28,8 +28,8 @@ class TrueLayer_Redirect {
 	 */
 	public function maybe_redirect() {
 
-		$transaction_id = filter_input( INPUT_GET, 'payment_id', FILTER_SANITIZE_STRING );
-		$error          = filter_input( INPUT_GET, 'error', FILTER_SANITIZE_STRING );
+		$transaction_id = filter_input( INPUT_GET, 'payment_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		$error          = filter_input( INPUT_GET, 'error', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		$query_args = array(
 			'fields'      => 'ids',

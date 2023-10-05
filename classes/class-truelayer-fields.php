@@ -189,6 +189,14 @@ class TrueLayer_Fields {
 				'desc_tip' => true,
 			),
 
+			'truelayer_release_channel'                     => array(
+				'title'       => __( 'Release channel', 'truelayer-for-woocommerce' ),
+				'type'        => 'text',
+				'description' => __( 'Enter the release channel that you wish to use for TrueLayer', 'truelayer-for-woocommerce' ),
+				'default'     => '',
+				'desc_tip'    => true,
+			),
+
 			'truelayer_payment_page_type'               => array(
 				'title'    => __( 'Payments Page Types', 'truelayer-for-woocommerce' ),
 				'type'     => 'select',

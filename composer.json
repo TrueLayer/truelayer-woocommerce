@@ -9,5 +9,8 @@
         "platform": {
             "php": "7.4"
         }
+    },
+    "require-dev": {
+        "php-stubs/woocommerce-stubs": "^8.1"
     }
 }
