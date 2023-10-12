@@ -113,7 +113,7 @@ class TrueLayer_Callbacks {
 		}
 
 		$order_id = $order->get_id();
-		TrueLayer_Logger::log( "Handle payment_executed callback for order ID ${order_id}." );
+		TrueLayer_Logger::log( "Handle payment_executed callback for order ID {$order_id}." );
 
 		// Error handling.
 		if ( isset( $body['failure_reason'] ) && ! empty( $body['failure_reason'] ) ) {
@@ -158,7 +158,7 @@ class TrueLayer_Callbacks {
 		}
 
 		$order_id = $order->get_id();
-		TrueLayer_Logger::log( "Handle payment_settled callback for order ID ${order_id}." );
+		TrueLayer_Logger::log( "Handle payment_settled callback for order ID {$order_id}." );
 
 		// Error handling.
 		if ( isset( $body['failure_reason'] ) && ! empty( $body['failure_reason'] ) ) {
@@ -196,7 +196,7 @@ class TrueLayer_Callbacks {
 		}
 
 		$order_id = $order->get_id();
-		TrueLayer_Logger::log( "Handle payment_failed callback for order ID ${order_id}." );
+		TrueLayer_Logger::log( "Handle payment_failed callback for order ID {$order_id}." );
 
 		// Error handling.
 		if ( isset( $body['failure_reason'] ) && ! empty( $body['failure_reason'] ) ) {
@@ -236,7 +236,7 @@ class TrueLayer_Callbacks {
 		}
 
 		$order_id = $order->get_id();
-		TrueLayer_Logger::log( "Handle payout_executed callback for order ID ${order_id}." );
+		TrueLayer_Logger::log( "Handle payout_executed callback for order ID {$order_id}." );
 
 		// Error handling.
 		if ( isset( $body['failure_reason'] ) && ! empty( $body['failure_reason'] ) ) {
@@ -272,7 +272,7 @@ class TrueLayer_Callbacks {
 		}
 
 		$order_id = $order->get_id();
-		TrueLayer_Logger::log( "Handle handle_payout_failed callback for order ID ${order_id}." );
+		TrueLayer_Logger::log( "Handle handle_payout_failed callback for order ID {$order_id}." );
 
 		// Error handling.
 		if ( isset( $body['failure_reason'] ) && ! empty( $body['failure_reason'] ) ) {
@@ -300,7 +300,7 @@ class TrueLayer_Callbacks {
 		}
 
 		$order_id = $order->get_id();
-		TrueLayer_Logger::log( "Handle refund_executed callback for order ID ${order_id}." );
+		TrueLayer_Logger::log( "Handle refund_executed callback for order ID {$order_id}." );
 
 		// Error handling.
 		if ( isset( $body['failure_reason'] ) && ! empty( $body['failure_reason'] ) ) {
@@ -336,7 +336,7 @@ class TrueLayer_Callbacks {
 		}
 
 		$order_id = $order->get_id();
-		TrueLayer_Logger::log( "Handle handle_refund_failed callback for order ID ${order_id}." );
+		TrueLayer_Logger::log( "Handle handle_refund_failed callback for order ID {$order_id}." );
 
 		// Error handling.
 		if ( isset( $body['failure_reason'] ) && ! empty( $body['failure_reason'] ) ) {
