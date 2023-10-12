@@ -155,7 +155,10 @@ abstract class TrueLayer_Request {
 	 * @return string
 	 */
 	protected function get_client_secret() {
-		return $this->is_test_mode() ? TruelayerEncryption()->decrypt( $this->settings['truelayer_sandbox_client_secret'] ) : TruelayerEncryption()->decrypt( $this->settings['truelayer_client_secret'] );
+		$key           = $this->is_test_mode() ? 'truelayer_sandbox_client_secret' : 'truelayer_client_secret';
+		$client_secret = TruelayerEncryption()->decrypt_value( $key );
+
+		return $client_secret;
 	}
 
 	/**
@@ -164,7 +167,10 @@ abstract class TrueLayer_Request {
 	 * @return string
 	 */
 	public function get_certificate() {
-		return $this->is_test_mode() ? TruelayerEncryption()->decrypt( $this->settings['truelayer_sandbox_client_certificate'] ) : TruelayerEncryption()->decrypt( $this->settings['truelayer_client_certificate'] );
+		$key         = $this->is_test_mode() ? 'truelayer_sandbox_client_certificate' : 'truelayer_client_certificate';
+		$certificate = TruelayerEncryption()->decrypt_value( $key );
+
+		return $certificate;
 	}
 
 	/**
@@ -173,7 +179,10 @@ abstract class TrueLayer_Request {
 	 * @return string
 	 */
 	public function get_private_key() {
-		return $this->is_test_mode() ? TruelayerEncryption()->decrypt( $this->settings['truelayer_sandbox_client_private_key'] ) : TruelayerEncryption()->decrypt( $this->settings['truelayer_client_private_key'] );
+		$key         = $this->is_test_mode() ? 'truelayer_sandbox_client_private_key' : 'truelayer_client_private_key';
+		$private_key = TruelayerEncryption()->decrypt_value( $key );
+
+		return $private_key;
 	}
 
 	/**
