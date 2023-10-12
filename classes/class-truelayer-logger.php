@@ -68,38 +68,31 @@ class TrueLayer_Logger {
 	 * @return array
 	 */
 	public static function format_log( $truelayer_order_id, $method, $title, $request_args, $response, $code, $request_url = null, $tl_trace_id = '' ) {
-		// Unset the snippet to prevent issues in the response.
-		if ( ! is_wp_error( $response ) && isset( $response['OrderHtmlSnippet'] ) ) {// todo check snippet.
-			unset( $response['OrderHtmlSnippet'] );
-		}
-		
-		// Unset the snippet to prevent issues in the request body.
+		// Clean the request args body from the client_secret if its set.
 		if ( isset( $request_args['body'] ) ) {
 			$request_body = json_decode($request_args['body'], true);
 
-			if (isset($request_body['OrderHtmlSnippet'])) {
-				unset($request_body['OrderHtmlSnippet']);
-				$request_args['body'] = wp_json_encode($request_body);
-			}
-
-			if (isset($request_body['client_secret'])) {
-				unset($request_body['client_secret']);
+			if ( isset( $request_body['client_secret'] ) ) {
+				unset( $request_body['client_secret'] );
 				$request_args['body'] = wp_json_encode($request_body);
 			}
 		}
 
-		// Remove Authorization token if it is returned.
-		if ( ! is_wp_error( $response ) && isset( $response['body'] ) ) {
-			$response_body = json_decode( $response['body'], true );
-			if ( isset( $response_body['access_token'] ) && apply_filters( 'truelayer_remove_sensitive_data_from_logs', true ) ) {
+		// Remove sensitive data from the logs if the filter is set to true.
+		if ( apply_filters( 'truelayer_remove_sensitive_data_from_logs', true ) ) {
+			// Remove the access token from the logs if it was set, and the response is not a WP_Error.
+			if ( ! is_wp_error( $response ) && isset( $response['body'] ) ) {
+				$response_body                 = json_decode( $response['body'], true );
 				$response_body['access_token'] = 'Removed from log';
-				$response['body']              = wp_json_encode( $response_body );
+				$response['body']              = $response_body; // Dont json encode to prevent double encoding in the log.
+			}
+
+			// Remove the auth header from the request args if its set.
+			if ( isset( $request_args['headers']['Authorization'] ) ) {
+				$request_args['headers']['Authorization'] = 'Removed from log';
 			}
 		}
 
-		if ( isset( $request_args['headers']['Authorization'] ) && apply_filters( 'truelayer_remove_sensitive_data_from_logs', true ) ) {
-			$request_args['headers']['Authorization'] = 'Removed from log';
-		}
 		return array(
 			'id'             => $truelayer_order_id,
 			'type'           => $method,
