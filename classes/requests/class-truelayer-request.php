@@ -210,14 +210,14 @@ abstract class TrueLayer_Request {
 	/**
 	 * Get the request args.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	abstract protected function get_request_args();
 
 	/**
 	 * Get the request URL.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	abstract protected function get_request_url();
 
