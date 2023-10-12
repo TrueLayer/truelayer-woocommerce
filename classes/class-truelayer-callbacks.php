@@ -91,7 +91,7 @@ class TrueLayer_Callbacks {
 					$status   = $body['type'];
 					$order = $this->get_woocommerce_order_from_payment_id( $body['payment_id'] );
 					$order_id = is_object( $order ) ? $order->get_id() : '';
-					TrueLayer_Logger::log( "Unhandled callback for order ${order_id}. Callback type: ${status}" );
+					TrueLayer_Logger::log( "Unhandled callback for order {$order_id}. Callback type: {$status}" );
 					break;
 			}
 		}
