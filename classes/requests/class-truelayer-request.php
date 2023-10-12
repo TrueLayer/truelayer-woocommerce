@@ -277,13 +277,14 @@ abstract class TrueLayer_Request {
 	/**
 	 * Logs the response from the request.
 	 *
-	 * @param object|WP_Error $response The response from the request.
+	 * @param array|WP_Error $response The response from the request.
 	 * @param array           $request_args The request args.
 	 * @param string          $request_url The request URL.
 	 * @return void
 	 */
 	protected function log_response( $response, $request_args, $request_url ) {
-		$id          = isset( $response->id ) ? $response->id : null;
+		$body        = json_decode( wp_remote_retrieve_body( $response ), true );
+		$id          = $body['id'] ?? null;
 		$method      = $this->method;
 		$code        = wp_remote_retrieve_response_code( $response );
 		$title       = $this->log_title;
