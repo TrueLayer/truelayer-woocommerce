@@ -5,6 +5,7 @@
  * @package TrueLayer_For_WooCommerce/Classes
  */
 
+use Defuse\Crypto\Exception\EnvironmentIsBrokenException;
 use Defuse\Crypto\Key;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -84,6 +85,11 @@ class TrueLayer_Config_Keys {
 			if ( false !== stripos( $line, 'NONCE_SALT' ) ) {
 				$offset = $key;
 			}
+
+			// If we find any lines that contain the TRUELAYER_KEY constant, then we don't need to add it.
+			if ( false !== stripos( $line, 'TRUELAYER_KEY' ) ) {
+				return;
+			}
 		}
 		array_splice( $lines, $offset + 1, 0, array( "define( 'TRUELAYER_KEY', " . "'" . $generated_key . "' );" ) );
 		$data = implode( PHP_EOL, $lines );
@@ -118,7 +124,6 @@ class TrueLayer_Config_Keys {
 	 * @return void.
 	 */
 	public function maybe_create_truelayer_key() {
-
 		if ( defined( 'TRUELAYER_KEY' ) ) {
 			return;
 		}
