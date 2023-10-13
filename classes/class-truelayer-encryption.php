@@ -184,8 +184,8 @@ class Truelayer_Encryption {
 	 * @return string|bool Encrypted value or false on failure
 	 */
 	public function encrypt( $value ) {
-		// If the value to encrypt is an empty string, just return it.
-		if ( empty( $value ) ) {
+		// If the value to encrypt is an empty string, or if its not a string, just return it.
+		if ( empty( $value ) || ! is_string( $value ) ) {
 			return $value;
 		}
 
@@ -209,8 +209,8 @@ class Truelayer_Encryption {
 	 * @return string|bool Decrypted value, or false on failure.
 	 */
 	public function decrypt( $raw_value ) {
-		// If the value to decrypt is an empty string, just return it.
-		if ( empty( $raw_value ) ) {
+		// If the value to decrypt is an empty string or if its not a string, just return it.
+		if ( empty( $raw_value ) || ! is_string( $raw_value ) ) {
 			return $raw_value;
 		}
 
