@@ -35,6 +35,7 @@ class TrueLayer_Install {
 	private static $version_changes = array(
 		'1.4.0' => array(
 			'truelayer_140_ensure_truelayer_key_exists',
+			'truelayer_140_ensure_settings_encrypted'
 		)
 	);
 
