@@ -29,3 +29,17 @@ function get_option( $option, $default = null ) {
 
 	return $default;
 }
+
+/**
+ * Mock delete_option
+ */
+function delete_option( $key ) {
+	// Do nothing.
+}
+
+/**
+ * Mock update_option
+ */
+function update_option( $key, $value ) {
+	// Do nothing.
+}
