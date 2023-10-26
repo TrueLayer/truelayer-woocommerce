@@ -17,7 +17,7 @@ use Ramsey\Uuid\Uuid;
  */
 class Truelayer_Helper_Signing {
 	/**
-	 * Get the Tl Signature for the requst.
+	 * Get the Tl Signature for the request.
 	 *
 	 * @param array             $body The request body.
 	 * @param TrueLayer_Request $request The request class.
