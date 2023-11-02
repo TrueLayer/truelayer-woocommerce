@@ -100,19 +100,6 @@ if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 		 */
 		protected function __construct() {
 			add_action( 'plugins_loaded', array( $this, 'init' ) );
-			register_activation_hook( __FILE__, array( $this, 'create_truelayer_key' ) );
-		}
-		/**
-		 * Defines a TRUELAYER_KEY constant and saves it to wp-config.php on plugin activation.
-		 *
-		 * @return void|false
-		 */
-		public function create_truelayer_key() {
-			// Include the required files to generate a key.
-			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-config-keys.php';
-
-			// Maybe create a TRUELAYER_KEY.
-			TrueLayer_Config_Keys::get_instance()->maybe_create_truelayer_key();
 		}
 
 		/**
