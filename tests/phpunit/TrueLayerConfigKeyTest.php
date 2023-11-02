@@ -94,7 +94,7 @@ class TrueLayerConfigKeyTest extends TestCase {
 	public function test_key_and_value_sanitation() {
 		$config_editor = new TrueLayer_Config_Editor( self::CONFIG_PATH, self::BACKUP_PATH );
 
-		$config_editor->add_key( '?>TEST_KEY', 'TEST_VALUE(^*)' );
+		$config_editor->add_key( '?>TEST_KEY', 'TEST_VALUE\'' );
 
 		$this->assertFileEquals( self::CONFIG_PATH, self::HAS_KEY_PATH );
 	}
