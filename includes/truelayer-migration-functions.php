@@ -34,9 +34,11 @@ function truelayer_140_ensure_truelayer_key_exists() {
 
 	// If the key was not successfully added, then we need to show an admin notice to the merchant.
 	if ( ! $result ) {
+		TrueLayer_Logger::log( 'Failed to add the TRUELAYER_KEY to the wp-config.php file.' );
 		return;
 	}
 
+	Truelayer_Logger::log( 'TRUELAYER_KEY added to the wp-config.php file.' );
 	do_action( 'true_layer_key_set' );
 }
 
