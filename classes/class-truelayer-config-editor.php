@@ -13,18 +13,30 @@ if ( ! defined( 'ABSPATH' ) ) {
  * The TrueLayer Config Editor class
  */
 class TrueLayer_Config_Editor {
+	/**
+	 * The path to the file you want to edit.
+	 *
+	 * @var string
+	 */
 	private $config_path;
+
+	/**
+	 * The path to the backup file that will be created.
+	 *
+	 * @var string
+	 */
 	private $backup_path;
 
 	/**
 	 * Class constructor to setup the class.
 	 *
 	 * @param string $path The path to the file you want to edit. Defaults to wp-config.php.
-	 * @param string $backup_path The path to the backup file. Defaults to wp-config-backup.php.
+	 * @param string $backup_path The path to the backup file. Defaults to wp-config-backup-{$timestamp}.php. Where the timestamp is the current unix timestamp.
 	 */
 	public function __construct( $path = '', $backup_path = '' ) {
+		$timestamp         = time();
 		$this->config_path = empty( $path ) ? ABSPATH . 'wp-config.php' : $path;
-		$this->backup_path = empty( $backup_path ) ? ABSPATH . 'wp-config-backup.php' : $backup_path;
+		$this->backup_path = empty( $backup_path ) ? ABSPATH . "wp-config-backup-{$timestamp}.php" : $backup_path;
 	}
 
 	/**
