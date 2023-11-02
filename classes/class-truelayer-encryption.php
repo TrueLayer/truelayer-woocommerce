@@ -286,7 +286,7 @@ class Truelayer_Encryption {
 	 */
 	private function are_equal( $current_value, $new_value ) {
 		// First decrypt the current value.
-		$decrypted_current_value = $this->decrypt( $current_value );
+		$decrypted_current_value = empty( $current_value ) ? '' : $this->decrypt( $current_value );
 
 		// Compare the decrypted current value to the new value.
 		return $decrypted_current_value === $new_value;
