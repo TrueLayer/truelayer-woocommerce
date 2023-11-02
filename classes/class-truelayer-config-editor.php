@@ -56,6 +56,7 @@ class TrueLayer_Config_Editor {
 
 		// If the backup failed, then we cannot continue, since it might mean the write protection of the folder is on.
 		if ( ! $backup_result ) {
+			TrueLayer_Logger::log( "Failed to create a backup file from the original. Original file: $this->config_path. Backup path: $this->backup_path" );
 			return false; // Backup failed
 		}
 
@@ -64,6 +65,7 @@ class TrueLayer_Config_Editor {
 		// Check if key already exists
 		foreach ( $config_data as $line ) {
 			if ( strpos( $line, $key_name ) !== false ) {
+				TrueLayer_Logger::log( "A key with the name $key_name already exists in the file $this->config_path." );
 				return false; // Key already exists
 			}
 		}
@@ -71,7 +73,6 @@ class TrueLayer_Config_Editor {
 		// Find the place to add the new key
 		$insert_at = 0;
 		foreach ( $config_data as $index => $line ) {
-
 			// Try to insert the new key after the nonce salt definition
 			if ( strpos( $line, 'NONCE_SALT' ) !== false ) {
 				$insert_at = $index + 1;
@@ -109,7 +110,8 @@ class TrueLayer_Config_Editor {
 			}
 		}
 
-		return false; // Key not found
+		TrueLayer_Logger::log( "The key was not found when removing the definition. Filename: $this->config_path. Definition: $key_name." );
+		return false; // Key not found.
 	}
 
 	/**
@@ -126,6 +128,7 @@ class TrueLayer_Config_Editor {
 		$write_success = file_put_contents( $temp_file, implode( PHP_EOL, $config_data ) );
 
 		if ( $write_success === false ) {
+			TrueLayer_Logger::log( "Writing to a temporary file failed when adding the definition. Filename: $temp_file." );
 			return false; // Writing to temp file failed
 		}
 
