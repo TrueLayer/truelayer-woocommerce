@@ -18,7 +18,6 @@ use Defuse\Crypto\Key;
  * @author   Krokedil
  */
 class Truelayer_Admin_Notices {
-
 	/**
 	 * The reference the *Singleton* instance of this class.
 	 *
@@ -70,10 +69,10 @@ class Truelayer_Admin_Notices {
 		?>
 		<div class="truelayer-message notice woocommerce-message notice-error">
 			<p>
-		<?php echo wp_kses_post( wpautop( $message ) ); ?>
-				<code>define( 'TRUELAYER_KEY', "<?php echo esc_html( $this->generate_new_key() ) ?>");</code>
+				<?php echo wp_kses_post($message); ?>
+				<code>define( 'TRUELAYER_KEY', "<?php echo esc_html($this->generate_new_key()) ?>");</code>
 			</p>
-			</div>
+		</div>
 		<?php
 	}
 
@@ -99,10 +98,10 @@ class Truelayer_Admin_Notices {
 		?>
 		<div class="truelayer-message notice woocommerce-message notice-error">
 			<p>
-				<?php echo wp_kses_post( wpautop( $encryption_error ) ); ?>
+				<?php echo wp_kses_post($encryption_error); ?>
 			</p>
 		</div>
-<?php
+		<?php
 	}
 
 	/**
@@ -127,9 +126,9 @@ class Truelayer_Admin_Notices {
 		?>
 		<div class="truelayer-message notice woocommerce-message notice-error">
 			<p>
-				<?php echo wp_kses_post( wpautop( $encryption_error ) ); ?>
+				<?php echo wp_kses_post($encryption_error); ?>
+				<code>define( 'TRUELAYER_KEY', "<?php echo esc_html($this->generate_new_key()) ?>");</code>
 			</p>
-			<code>define( 'TRUELAYER_KEY', "<?php echo esc_html( $this->generate_new_key() ) ?>");</code>
 		</div>
 		<?php
 	}
