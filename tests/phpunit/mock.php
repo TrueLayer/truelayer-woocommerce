@@ -43,3 +43,12 @@ function delete_option( $key ) {
 function update_option( $key, $value ) {
 	// Do nothing.
 }
+
+/**
+ * Mock for our logger to avoid having to deal with its logic for now.
+ */
+class TrueLayer_Logger {
+	public static function log( $message ) {
+		// Do nothing.
+	}
+}
