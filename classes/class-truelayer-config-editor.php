@@ -167,8 +167,8 @@ class TrueLayer_Config_Editor {
 	 * @return string The sanitized key value.
 	 */
 	protected function sanitize_key_value( $key_value ) {
-		// Remove all non-alphanumeric characters
-		$key_value = preg_replace( '/[^A-Z0-9_]/', '', $key_value );
+		// Sanitize the string to be used in a PHP string enclosed by single quotes.
+		$key_value = str_replace( '\'', "", $key_value );
 
 		return $key_value;
 	}
