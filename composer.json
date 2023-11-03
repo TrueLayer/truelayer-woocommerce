@@ -11,6 +11,10 @@
         }
     },
     "require-dev": {
-        "php-stubs/woocommerce-stubs": "^8.1"
+        "php-stubs/woocommerce-stubs": "^8.1",
+        "phpunit/phpunit": "^9.6"
+    },
+    "scripts": {
+        "test": "phpunit --configuration phpunit.xml"
     }
 }

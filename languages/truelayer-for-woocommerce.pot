@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the TrueLayer for WooCommerce package.
 msgid ""
 msgstr ""
-"Project-Id-Version: TrueLayer for WooCommerce 1.2.0\n"
+"Project-Id-Version: TrueLayer for WooCommerce 1.4.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/truelayer-woocommerce\n"
-"POT-Creation-Date: 2023-05-10 15:39:19+00:00\n"
+"POT-Creation-Date: 2023-10-23 12:53:11+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,6 +13,14 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: classes/admin/class-truelayer-admin-notices.php:69
+msgid ""
+"<b>TrueLayer for WooCommerce</b> was unable to save data to the "
+"<code>wp-config.php</code> file. The following code needs to be manually "
+"added to <code>wp-config.php</code> for the plugin to function properly.\n"
+" "
+msgstr ""
 
 #: classes/class-truelayer-callbacks.php:123
 #: classes/class-truelayer-callbacks.php:206
@@ -78,20 +86,38 @@ msgstr ""
 msgid "Billing State"
 msgstr ""
 
-#: classes/class-truelayer-config-keys.php:52
-#: classes/class-truelayer-config-keys.php:61
-#: classes/class-truelayer-encryption.php:77
-#: classes/class-truelayer-encryption.php:86 truelayer-for-woocommerce.php:74
-#: truelayer-for-woocommerce.php:83
-msgid "Nope"
-msgstr ""
-
 #: classes/class-truelayer-confirmation.php:57
 msgid "Something went wrong, please contact the store owner."
 msgstr ""
 
 #: classes/class-truelayer-confirmation.php:69
 msgid "Customer canceled the TrueLayer payment."
+msgstr ""
+
+#: classes/class-truelayer-encryption.php:91
+#: classes/class-truelayer-encryption.php:100 truelayer-for-woocommerce.php:79
+#: truelayer-for-woocommerce.php:88
+msgid "Nope"
+msgstr ""
+
+#: classes/class-truelayer-encryption.php:206
+msgid ""
+"There was an error when encrypting the settings for TrueLayer, please "
+"reconfigure the plugin and ensure the settings are saved properly."
+msgstr ""
+
+#: classes/class-truelayer-encryption.php:235
+msgid ""
+"There was an error when decrypting the settings for TrueLayer, please "
+"reconfigure the plugin and ensure the settings are saved properly."
+msgstr ""
+
+#: classes/class-truelayer-encryption.php:271
+msgid ""
+"There was an error when loading the encryption key for TrueLayer, please "
+"ensure the encryption key saved in the <code>wp-config.php</code> file as "
+"<code>TRUELAYER_KEY</code> has not been modified. To reset delete the "
+"definition and add a new key."
 msgstr ""
 
 #: classes/class-truelayer-fields.php:25
@@ -281,36 +307,44 @@ msgid "Corporate"
 msgstr ""
 
 #: classes/class-truelayer-fields.php:193
+msgid "Release channel"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:195
+msgid "Enter the release channel that you wish to use for TrueLayer"
+msgstr ""
+
+#: classes/class-truelayer-fields.php:201
 msgid "Payments Page Types"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:196
+#: classes/class-truelayer-fields.php:204
 msgid "Hosted Payments Page"
 msgstr ""
 
-#: classes/class-truelayer-fields.php:197
+#: classes/class-truelayer-fields.php:205
 msgid "Embedded Payments Page"
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:37
+#: classes/class-truelayer-gateway.php:35
 #: includes/admin/views/status-report.php:17
 msgid "TrueLayer"
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:38
+#: classes/class-truelayer-gateway.php:36
 msgid "Direct bank payments via TrueLayer."
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:169
+#: classes/class-truelayer-gateway.php:151
 msgid "Failed creating order with TrueLayer"
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:219
+#: classes/class-truelayer-gateway.php:206
 #. translators: refund error.
 msgid "TrueLayer order refund failed: %s"
 msgstr ""
 
-#: classes/class-truelayer-gateway.php:224
+#: classes/class-truelayer-gateway.php:211
 #. translators: refund amount.
 msgid ""
 "TrueLayer received refund request (%s). Awaiting refund executed "
@@ -345,11 +379,18 @@ msgstr ""
 msgid "Order successfully placed with TrueLayer. Payment transaction id:"
 msgstr ""
 
-#: truelayer-for-woocommerce.php:158
+#: truelayer-for-woocommerce.php:166 truelayer-for-woocommerce.php:175
+msgid ""
+"Your installation of TrueLayer for WooCommerce is not complete. If you "
+"installed this plugin directly from Github please refer to the "
+"readme.dev.txt file in the plugin."
+msgstr ""
+
+#: truelayer-for-woocommerce.php:193
 msgid "Settings"
 msgstr ""
 
-#: truelayer-for-woocommerce.php:159
+#: truelayer-for-woocommerce.php:194
 msgid "Support"
 msgstr ""
 

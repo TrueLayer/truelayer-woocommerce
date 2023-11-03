@@ -25,3 +25,6 @@ README.md
 readme.dev.txt
 webpack.config.js
 yarn.lock
+/tests
+phpunit.xml.dist
+.phpunit.result.cache

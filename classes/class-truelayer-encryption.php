@@ -6,6 +6,7 @@
  */
 
 use Defuse\Crypto\Crypto;
+use Defuse\Crypto\Exception\BadFormatException;
 use Defuse\Crypto\Exception\EnvironmentIsBrokenException;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
 use Defuse\Crypto\Key;
@@ -25,7 +26,7 @@ class Truelayer_Encryption {
 	/**
 	 * Key to use for encryption.
 	 *
-	 * @var string
+	 * @var Key
 	 */
 	private $key;
 
@@ -44,6 +45,20 @@ class Truelayer_Encryption {
 	protected $testmode;
 
 	/**
+	 * The keys for the settings that are encrypted.
+	 *
+	 * @var array
+	 */
+	protected $encrypted_keys = array(
+		'truelayer_sandbox_client_private_key',
+		'truelayer_sandbox_client_secret',
+		'truelayer_sandbox_client_certificate',
+		'truelayer_client_private_key',
+		'truelayer_client_secret',
+		'truelayer_client_certificate',
+	);
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.0
@@ -51,14 +66,13 @@ class Truelayer_Encryption {
 	public function __construct() {
 		$this->key      = $this->get_default_key();
 		$this->settings = get_option( 'woocommerce_truelayer_settings', array() );
-		add_filter( 'woocommerce_settings_api_sanitized_fields_truelayer', array( $this, 'update_truelayer_credit' ) );
-		add_action( 'init', array( $this, 'maybe_encrypt_settings_after_plugin_update' ), 20 );
+		add_filter( 'woocommerce_settings_api_sanitized_fields_truelayer', array( $this, 'encrypt_values' ) );
 	}
 
 	/**
 	 * Returns the *Singleton* instance of this class.
 	 *
-	 * @return self::$instance The *Singleton* instance.
+	 * @return self The *Singleton* instance.
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -87,104 +101,156 @@ class Truelayer_Encryption {
 	}
 
 	/**
-	 * Update specific gateway settings.
+	 * Encrypt any values that should be encrypted before we store them in the database.
 	 *
 	 * @param array $settings The gateway settings.
 	 *
 	 * @return mixed
 	 */
-	public function update_truelayer_credit( $settings ) {
-		// if the key does not exist, don't do anything.
+	public function encrypt_values( $settings ) {
+		// If the key does not exist, don't do anything.
 		if ( ! defined( 'TRUELAYER_KEY' ) ) {
 			return false;
 		}
-		$private_key = null;
-		if ( 'yes' === $settings['testmode'] ) {
-			$private_key        = 'truelayer_sandbox_client_private_key';
-			$client_secret      = 'truelayer_sandbox_client_secret';
-			$client_certificate = 'truelayer_sandbox_client_certificate';
-		} else {
-			$private_key        = 'truelayer_client_private_key';
-			$client_secret      = 'truelayer_client_secret';
-			$client_certificate = 'truelayer_client_certificate';
 
-		}
-		$truelayer_options = array( $private_key, $client_secret, $client_certificate );
-		foreach ( $truelayer_options as $truelayer_option ) {
-			if ( ! empty( $this->settings[ $truelayer_option ] ) ) {
-				$old_value = $this->settings[ $truelayer_option ];
-				try {
-					if ( $this->decrypt( $settings[ $truelayer_option ] ) === $this->decrypt( $old_value ) ) {
-						$settings[ $truelayer_option ] = $old_value;
-					} else {
-						$settings[ $truelayer_option ] = $this->encrypt( $settings[ $truelayer_option ] );
-					}
-				} catch ( EnvironmentIsBrokenException | WrongKeyOrModifiedCiphertextException $e ) {
-					$settings[ $truelayer_option ] = $this->encrypt( $settings[ $truelayer_option ] );
-				}
-			} else {
-				$settings[ $truelayer_option ] = $this->encrypt( $settings[ $truelayer_option ] );
+		// Clear any encryption error notices. New errors will be generated if an issue exists.
+		delete_option( 'truelayer_encryption_error' );
+
+		// Loop each of the encrypted keys and ensure the value is encrypted before saving.
+		foreach ( $this->encrypted_keys as $encrypted_key ) {
+			// Get the current value of the setting before updating.
+			$current_value = $this->settings[ $encrypted_key ] ?? false;
+			$new_value     = $settings[ $encrypted_key ] ?? false;
+
+			// If the new value is empty, continue.
+			if ( empty( $new_value ) ) {
+				continue;
 			}
-		}
-		return $settings;
 
+			// Compare if the new value is the same as the current value after it is decrypted.
+			$are_equal = $this->are_equal( $current_value, $new_value );
+
+			// If the values are not equal, then encrypt the new value, else just save the current value since its already encrypted.
+			$encrypted_value = $are_equal ? $current_value : $this->encrypt( $new_value );
+
+			// Update the value in the settings array.
+			$settings[ $encrypted_key ] = $encrypted_value ? $encrypted_value : '';
+		}
+
+		return $settings;
 	}
 
 	/**
-	 * Checks if settings keys needs to be encrypted.
-	 * Helps users running version 0.9.3 to automatically encrypt keys when updating the plugin without needing to resave the plugin settings manually.
+	 * Returns the settings with the encrypted values decrypted.
 	 *
-	 * @Todo: remove this function in a future version since all new plugin users will save the plugin settings when configuring the plugin, and that will trigger the encryption.
+	 * @param array $settings The gateway settings.
 	 *
-	 * @return bool|void
+	 * @return array
 	 */
-	public function maybe_encrypt_settings_after_plugin_update() {
-
-		// if the key does not exist, do nothing.
+	public function decrypt_values( $settings ) {
+		// If the key does not exist, don't do anything.
 		if ( ! defined( 'TRUELAYER_KEY' ) ) {
-			return;
+			return $settings;
 		}
 
-		// If plugin settings is empty, do nothing.
-		$settings = get_option( 'woocommerce_truelayer_settings', array() );
-		if ( empty( $settings ) ) {
-			return;
+		// Clear any encryption error notices. New errors will be generated if an issue exists.
+		delete_option( 'truelayer_encryption_error' );
+
+		foreach ( $this->encrypted_keys as $encrypted_key ) {
+			$decrypted_value            = $this->decrypt_value( $encrypted_key );
+
+			$settings[ $encrypted_key ] = $decrypted_value ? $decrypted_value : '';
 		}
 
-		// Maybe encrypt the values.
-		$updated_settings = $this->update_truelayer_credit( $settings );
-
-		// If the updated settings has changed (values have been encrypted), save it to the woocommerce_truelayer_settings option.
-		if ( $settings !== $updated_settings ) {
-			update_option( 'woocommerce_truelayer_settings', $updated_settings, 'yes' );
-		}
+		return $settings;
 	}
+
+	/**
+	 * Returns the setting with the encrypted values decrypted.
+	 *
+	 * @param string $key The key to decrypt.
+	 * @param string|bool $value The value to decrypt. Pass null to use the value from the settings array.
+	 *
+	 * @return string
+	 */
+	public function decrypt_value( $key, $value = null ) {
+		$value = $value ?? $this->settings[ $key ] ?? '';
+
+		// If the value is empty, just return it.
+		if ( empty( $value ) ) {
+			return $value;
+		}
+
+		return $this->decrypt( $value );
+	}
+
 
 	/**
 	 * Encrypts a value.
 	 *
 	 * @param string $value Value to encrypt.
-	 * @return string|void Encrypted value, or false on failure.
+	 * @return string|bool Encrypted value or false on failure
 	 */
 	public function encrypt( $value ) {
-		if ( defined( 'TRUELAYER_KEY' ) ) {
-			return Crypto::encrypt( $value, $this->key );
+		// If the value to encrypt is an empty string, or if its not a string, or if the key is null, just return the raw value.
+		if ( empty( $value ) || ! is_string( $value ) || null === $this->key ) {
+			return $value;
 		}
+
+		if ( defined( 'TRUELAYER_KEY' ) ) {
+			try {
+				return Crypto::encrypt( $value, $this->key );
+			}
+			catch (EnvironmentIsBrokenException | WrongKeyOrModifiedCiphertextException | BadFormatException $e) {
+				// If the value could not be encrypted, then we should add a error notice to the admin.
+				$message = __( 'There was an error when encrypting the settings for TrueLayer, please reconfigure the plugin and ensure the settings are saved properly.', 'truelayer-for-woocommerce' );
+				update_option( 'truelayer_encryption_error', $message, 'no' );
+
+				// Add a notice that the value could not be encrypted.
+				return false;
+			}
+		}
+
+		return false;
 	}
 
 	/**
 	 * Decrypts a value.
 	 *
 	 * @param string $raw_value Value to decrypt.
-	 * @return string|void Decrypted value, or false on failure.
-	 * @throws EnvironmentIsBrokenException Env is broken.
-	 * @throws WrongKeyOrModifiedCiphertextException Wrong key.
+	 * @return string|bool Decrypted value, or false on failure.
 	 */
 	public function decrypt( $raw_value ) {
-		if ( defined( 'TRUELAYER_KEY' ) ) {
-			return Crypto::Decrypt( $raw_value, $this->key );
+		// If the value to decrypt is an empty string or if its not a string, or if the key is null, just return the raw value.
+		if ( empty( $raw_value ) || ! is_string( $raw_value ) || null === $this->key ) {
+			return $raw_value;
 		}
 
+		if ( defined( 'TRUELAYER_KEY' ) ) {
+			try {
+				return Crypto::decrypt( $raw_value, $this->key );
+			}
+			catch (EnvironmentIsBrokenException | WrongKeyOrModifiedCiphertextException | BadFormatException $e) {
+				// If the value could not be decrypted, then we should add a error notice to the admin.
+				$message = __( 'There was an error when decrypting the settings for TrueLayer, please reconfigure the plugin and ensure the settings are saved properly.', 'truelayer-for-woocommerce' );
+				update_option( 'truelayer_encryption_error', $message, 'no' );
+
+				// Add a notice that the value could not be decrypted.
+				return false;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Test if the settings key is one that is a encrypted value.
+	 *
+	 * @param string $key The key to test.
+	 * @return bool
+	 */
+	public function is_encrypted_key( $key ) {
+		return in_array( $key, $this->encrypted_keys, true );
 	}
 
 	/**
@@ -196,9 +262,34 @@ class Truelayer_Encryption {
 	 */
 	private function get_default_key() {
 		if ( defined( 'TRUELAYER_KEY' ) && is_string( TRUELAYER_KEY ) ) {
-			return Key::loadFromAsciiSafeString( TRUELAYER_KEY );
+			// Delete any encryption key errors stored, if issue persists a new error will be generated.
+			delete_option( 'truelayer_encryption_key_error' );
+			try {
+				return Key::loadFromAsciiSafeString( TRUELAYER_KEY );
+			}
+			catch (BadFormatException | EnvironmentIsBrokenException $e) {
+				$message = __( 'There was an error when loading the encryption key for TrueLayer, please ensure the encryption key saved in the <code>wp-config.php</code> file as <code>TRUELAYER_KEY</code> has not been modified. To reset delete the definition and add a new key.', 'truelayer-for-woocommerce' );
+				update_option( 'truelayer_encryption_key_error', $message, 'no' );
+				return null;
+			}
 		}
 		return null;
+	}
+
+	/**
+	 * Tests if the encrypted current value in the database is equal to the new value we want to save.
+	 *
+	 * @param string $current_value The current value in the database.
+	 * @param string $new_value The new value we want to save.
+	 *
+	 * @return bool
+	 */
+	private function are_equal( $current_value, $new_value ) {
+		// First decrypt the current value.
+		$decrypted_current_value = empty( $current_value ) ? '' : $this->decrypt( $current_value );
+
+		// Compare the decrypted current value to the new value.
+		return $decrypted_current_value === $new_value;
 	}
 }
 Truelayer_Encryption::get_instance();

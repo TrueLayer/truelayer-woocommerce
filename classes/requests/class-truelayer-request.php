@@ -155,7 +155,10 @@ abstract class TrueLayer_Request {
 	 * @return string
 	 */
 	protected function get_client_secret() {
-		return $this->is_test_mode() ? TruelayerEncryption()->decrypt( $this->settings['truelayer_sandbox_client_secret'] ) : TruelayerEncryption()->decrypt( $this->settings['truelayer_client_secret'] );
+		$key           = $this->is_test_mode() ? 'truelayer_sandbox_client_secret' : 'truelayer_client_secret';
+		$client_secret = TruelayerEncryption()->decrypt_value( $key );
+
+		return $client_secret;
 	}
 
 	/**
@@ -164,7 +167,10 @@ abstract class TrueLayer_Request {
 	 * @return string
 	 */
 	public function get_certificate() {
-		return $this->is_test_mode() ? TruelayerEncryption()->decrypt( $this->settings['truelayer_sandbox_client_certificate'] ) : TruelayerEncryption()->decrypt( $this->settings['truelayer_client_certificate'] );
+		$key         = $this->is_test_mode() ? 'truelayer_sandbox_client_certificate' : 'truelayer_client_certificate';
+		$certificate = TruelayerEncryption()->decrypt_value( $key );
+
+		return $certificate;
 	}
 
 	/**
@@ -173,7 +179,10 @@ abstract class TrueLayer_Request {
 	 * @return string
 	 */
 	public function get_private_key() {
-		return $this->is_test_mode() ? TruelayerEncryption()->decrypt( $this->settings['truelayer_sandbox_client_private_key'] ) : TruelayerEncryption()->decrypt( $this->settings['truelayer_client_private_key'] );
+		$key         = $this->is_test_mode() ? 'truelayer_sandbox_client_private_key' : 'truelayer_client_private_key';
+		$private_key = TruelayerEncryption()->decrypt_value( $key );
+
+		return $private_key;
 	}
 
 	/**
@@ -201,14 +210,14 @@ abstract class TrueLayer_Request {
 	/**
 	 * Get the request args.
 	 *
-	 * @return void
+	 * @return array
 	 */
 	abstract protected function get_request_args();
 
 	/**
 	 * Get the request URL.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	abstract protected function get_request_url();
 
@@ -268,13 +277,14 @@ abstract class TrueLayer_Request {
 	/**
 	 * Logs the response from the request.
 	 *
-	 * @param object|WP_Error $response The response from the request.
+	 * @param array|WP_Error $response The response from the request.
 	 * @param array           $request_args The request args.
 	 * @param string          $request_url The request URL.
 	 * @return void
 	 */
 	protected function log_response( $response, $request_args, $request_url ) {
-		$id          = isset( $response->id ) ? $response->id : null;
+		$body        = json_decode( wp_remote_retrieve_body( $response ), true );
+		$id          = $body['id'] ?? null;
 		$method      = $this->method;
 		$code        = wp_remote_retrieve_response_code( $response );
 		$title       = $this->log_title;

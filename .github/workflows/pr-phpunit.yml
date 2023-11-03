@@ -1,0 +1,27 @@
+name: Run PHPUnit Tests
+on:
+  push:
+    tags:
+    - "*"
+jobs:
+  tag:
+    name: New tag
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+
+    - name: Install Composer dependencies
+      uses: php-actions/composer@v6
+      with:
+        dev: yes
+        php_version: 7.4
+
+    - name: Build assets and translation files
+      run: |
+        npm ci
+        npm run build
+
+    - name: Run PHPUnit tests
+      run: |
+        composer test
