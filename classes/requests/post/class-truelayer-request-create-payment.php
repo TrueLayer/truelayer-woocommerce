@@ -76,6 +76,11 @@ class TrueLayer_Request_Create_Payment extends TrueLayer_Request_Post {
             );
         }
 
+        $state = $order->get_billing_state();
+        if( ! empty( $state ) ) {
+            $body['user']['address']['state'] = $state;
+        }
+
         if( ! empty( $birth_date = TrueLayer_Helper_Order::get_user_date_of_birth( $order ) ) ) {
             $body['user']['date_of_birth'] = $birth_date;
         }
