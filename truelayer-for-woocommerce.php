@@ -5,7 +5,7 @@
  * Description: TrueLayer for WooCommerce.
  * Author: Krokedil
  * Author URI: https://krokedil.com/
- * Version: 1.4.1
+ * Version: 1.4.2
  * Text Domain: truelayer-for-woocommerce
  * Domain Path: /languages
  *
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'TRUELAYER_WC_MAIN_FILE', __FILE__ );
 define( 'TRUELAYER_WC_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'TRUELAYER_WC_PLUGIN_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
-define( 'TRUELAYER_WC_PLUGIN_VERSION', '1.4.1' );
+define( 'TRUELAYER_WC_PLUGIN_VERSION', '1.4.2' );
 
 if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 	/**
@@ -235,7 +235,6 @@ if ( ! class_exists( 'TrueLayer_For_WooCommerce' ) ) {
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-logger.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-status.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-assets.php';
-			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-checkout.php';
 
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/admin/class-wc-truelayer-banners.php';
 			include_once TRUELAYER_WC_PLUGIN_PATH . '/classes/class-truelayer-encryption.php';

@@ -71,10 +71,14 @@ class TrueLayer_Request_Create_Payment extends TrueLayer_Request_Post {
                 'address_line1' => $order->get_billing_address_1(),
                 'address_line2' => $order->get_billing_address_2(),
                 'city' => $order->get_billing_city(),
-                'state' => ! empty( $state = $order->get_billing_state() ) ? $state : 'NA',
                 'zip' => $order->get_billing_postcode(),
                 'country_code' => $order->get_billing_country(),
             );
+        }
+
+        $state = $order->get_billing_state();
+        if( ! empty( $state ) ) {
+            $body['user']['address']['state'] = $state;
         }
 
         if( ! empty( $birth_date = TrueLayer_Helper_Order::get_user_date_of_birth( $order ) ) ) {
