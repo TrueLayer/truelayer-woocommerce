@@ -31,17 +31,27 @@ class TrueLayer_Redirect {
 		$transaction_id = filter_input( INPUT_GET, 'payment_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$error          = filter_input( INPUT_GET, 'error', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
+		if ( empty( $transaction_id ) ) {
+			wp_safe_redirect( wc_get_cart_url() );
+			exit;
+		}
+
 		$query_args = array(
 			'fields'      => 'ids',
 			'post_type'   => wc_get_order_types(),
 			'post_status' => array_keys( wc_get_order_statuses() ),
-			'meta_key'    => '_truelayer_payment_id', // phpcs:ignore WordPress.DB.SlowDBQuery -- Slow DB Query is ok here, we need to limit to our meta key.
-			'meta_value'  => $transaction_id, // phpcs:ignore WordPress.DB.SlowDBQuery -- Slow DB Query is ok here, we need to limit to our meta key.
+			'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+				array(
+					'key'     => '_truelayer_payment_id',
+					'value'   => $transaction_id,
+					'compare' => '=',
+				),
+			),
 			'date_query'  => array(
 				array(
 					'after' => '3 day ago',
 				),
-		),
+			),
 		);
 
 		$orders = get_posts( $query_args );

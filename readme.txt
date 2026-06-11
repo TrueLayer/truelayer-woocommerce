@@ -8,7 +8,7 @@ WC requires at least: 6.0.0
 WC tested up to: 8.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 
 TrueLayer for WooCommerce is a plugin that extends WooCommerce, allowing you to take payments via TrueLayer.
 
@@ -54,6 +54,9 @@ More information on how to get started can be found in the [plugin documentation
 6. Read more about the configuration process in the [plugin documentation](https://docs.krokedil.com/truelayer-for-woocommerce/).
 
 == CHANGELOG ==
+= 2026.06.11        - version 1.4.3 =
+* Security          - Fix missing payment_id validation on the redirect endpoint.
+
 = 2024.04.26        - version 1.4.2 =
 * Fix               - Fixes issue with billing state field being mandatory
 
