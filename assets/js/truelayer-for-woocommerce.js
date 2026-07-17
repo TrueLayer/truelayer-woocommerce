@@ -21,6 +21,10 @@ jQuery(function ($) {
             // Parse the value into a URL object.
             const url = new URL(valueWithoutPrefix);
 
+            if ((url.protocol !== 'http:' && url.protocol !== 'https:') || url.origin !== window.location.origin) {
+                return;
+            }
+
             // Get the payment ID and token from the URL.
             const args = new URLSearchParams(url.search);
             const paymentId = args.get('payment_id');
