@@ -54,6 +54,9 @@ More information on how to get started can be found in the [plugin documentation
 6. Read more about the configuration process in the [plugin documentation](https://docs.krokedil.com/truelayer-for-woocommerce/).
 
 == CHANGELOG ==
+= 2026.07.22        - version 1.4.4 =
+* Security          - Validate redirect URL.
+
 = 2026.06.11        - version 1.4.3 =
 * Security          - Fix missing payment_id validation on the redirect endpoint.
 
